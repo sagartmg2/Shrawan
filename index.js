@@ -85,26 +85,7 @@ todos.forEach(task => {
 
 // console.log({ temp });
 
-
-// console.log(1);
-// console.log(1);
-// console.log(1);
-// console.log(1);
-
-
-
-// console.log(1);
-// console.log(12);
-// console.log(111111);
-
-
-
-
-
-
-
-
-
+// log("remove old bugs and add new featrues...")
 
 
 
@@ -179,9 +160,6 @@ async function getUser() {
 }
 
 getUser();
-
-
-
 
 console.log("finalllllllll");
 
