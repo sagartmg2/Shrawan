@@ -1,22 +1,14 @@
 
 
 console.log("in first line");
-<<<<<<< HEAD
 // asdfasdfadsf
-=======
 // asdfasdf
 // asdfasdf
 // asdfasdf
 // asdfasdf
-
-
 
 
 // fasdfadsf
-
->>>>>>> 1fdf74344ff8722e271c293097888bc3ffde838b
-
-
 
 // asdfasdfasdf
 
@@ -133,9 +125,6 @@ todos.forEach(task => {
 //     console.log("inside ab");
 // }
 
-
-// login ("middle line")
-
 // function cd() {
 //     console.log("cc---cd");
 //     // ab();
@@ -189,8 +178,5 @@ getUser();
 
 console.log("finalllllllll");
 
-
-
-console.log("in last line");
 
 
