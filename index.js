@@ -1,3 +1,6 @@
+
+
+console.log("in first line");
 <<<<<<< HEAD
 // asdfasdfadsf
 =======
