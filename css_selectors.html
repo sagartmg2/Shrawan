@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+        selector
+            id
+            class 
+            element
+
+            descendent selector
+            direct children selector 
+
+
+            adjescent sibling selector +
+            general sibing selector  ~
+
+            attribute
+         */
+
+        /* 
+         combined selctor
+          */
+
+
+        /* specificity score */
+
+
+
+
+        .heading {
+            color: orange;
+        }
+
+        #head-1.heading {
+            color: blue;
+        }
+
+        #head-1 {
+            color: aqua;
+        }
+
+        /* h1 {
+            color: red;
+        } */
+
+        /* .children {
+            color: teal;
+        } */
+
+        /* #child1 {
+            color: red;
+        } */
+
+
+        /* .grand-parent .parent-1.one p {
+            color: teal;
+        } */
+
+        .grand-parent>p {
+            color: red;
+        }
+
+        /* descendent secle */
+        .children>.child1 {
+            color: red;
+        }
+
+        /* .parent-1 ~ p {
+            color: red;
+        }
+         */
+
+        /* input {
+            background-color: brown;
+        } */
+        /* .button{
+            background-color: orange;
+        } */
+
+        /* .children.chil1 */
+
+        /* input[type = "text"]{ */
+        /* input[type ^= "text"]{ */
+            
+        input[type *= "text"]{
+            background-color: orange;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <!-- <h1 class="heading" id="head-1">hello</h1> -->
+    <div class="grand-parent">
+        <p>grand-parent</p>
+        <div class="parent-1 one">
+            <p>one</p>
+            <div class="">
+                <p class=" children child ">child</p>
+
+                <div class=" children child1 " id="">
+                    <h1>Children Target</h1>
+                    <span class="child1"> span child</span>
+                    <p>
+                        <span class="child1"> span child</span>
+                    </p>
+                </div>
+
+
+                <p class=" children child2 ">child2</p>
+                <h1 class="  ">child2</h1>
+            </div>
+        </div>
+        <div class="parent-1">
+            <p class=" children child ">child</p>
+            <p class=" children child1 " id="child1">child1</p>
+            <p class=" children child2 ">child2</p>
+            <h1 class="  ">child2</h1>
+        </div>
+        <p>the end</p>
+        <p>the end again </p>
+        <div>
+        </div>
+        <p>the end again </p>
+
+        <button type="button">login</button>
+
+        <form>
+            <input type="button" value="button" />
+            <input type="adsftextrandom" value="button" />
+            <input type="password" name="password" />
+        </form>
+
+</body>
+
+</html>
