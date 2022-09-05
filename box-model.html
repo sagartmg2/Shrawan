@@ -7,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-
-        *{
-            margin:0;
-            padding:0;
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
+            /* font-size: 80px; */
+
         }
 
         a:hover {
@@ -49,27 +50,28 @@
             color: blue
         }
 
-        .inline{
+        .inline {
             /* display: none; */
             /* visibility: hidden; */
             display: inline;
         }
-    
+
         /* .required-field{
             color: red;
         } */
 
-        .required-field::after{
+        .required-field::after {
             content: " * ";
             color: red;
         }
 
-        .box,.box2{
+        .box,
+        .box2 {
             background-color: orange;
-            height:200px;
-            width:200px;
+            height: 200px;
+            width: 200px;
             /* width: 50%; */
-            border:5px solid;
+            border: 5px solid;
             /* margin:50px; */
             /* padding:50px; */
             display: inline-block;
@@ -77,14 +79,14 @@
             /* box-sizing: border-box; */
         }
 
-        .box2{
+        .box2 {
             /* margin:100px; */
         }
 
-        .child{
+        .child {
             background-color: red;
-            width:50%;
-            height:50%;
+            width: 50%;
+            height: 50%;
         }
 
 
@@ -96,11 +98,11 @@
             em
             vh
             vw
-
             
             cm
             in
             pt
+            
         */
 
         /* 
@@ -112,19 +114,40 @@
         */
 
 
+        .parent {
+            font-size: 100px;
+        }
 
+        .children {
+            font-size: 40px;
+            font-size: .5em;
+        }
 
+        .viewheight {
+            background-color: black;
+            height: 50vh;
+            width: 50vw;
 
+            /* overflow: hidden; */
+            /* width: 100%; */
+            /* margin:20px; */
+        }
     </style>
 </head>
 
 <body>
 
+    <div class="viewheight">
+
+    </div>
+
+
+
 
     <div class="box">
         <div class="child">
 
-        </div> 
+        </div>
     </div>
     <div class="box2">
         box 2
@@ -139,6 +162,7 @@
     </ul>
 
     <div class="parent">
+        <p>parent data</p>
         <div class="children">one</div>
         <div class="children">two</div>
         <div class="children"></div>
@@ -161,14 +185,14 @@
 
     <form>
 
-        <input type="checkbox" disabled  />
+        <input type="checkbox" disabled />
         <input type="text" disabled />
         <div>
             <!-- <label class="">username <p class="inline required-field">*</p></label> -->
             <label class="required-field">username</label>
             <input type="text" autofocuss required />
         </div>
-            
+
         <input type="number" min="0" max="5" />
         <button>submit</button>
     </form>

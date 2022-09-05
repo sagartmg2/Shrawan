@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .children {
+        background-color: teal;
+        height: 100px;
+        width: 100px;
+        /* margin: 10px; */
+        border: 1px solid;
+    }
+
+    .static {
+        position: static;
+        background-color: red;
+    }
+
+    .p-relative {
+        border: 1px solid;
+    }
+
+    .relative {
+        position: relative;
+        left: 20px;
+        top: 20px;
+        background-color: cadetblue;
+    }
+
+    .fixed {
+        position: fixed;
+        background-color: aqua;
+        left: 50px;
+        top: 10px;
+        /* top: 2em; */
+    }
+
+    .absolute {
+        position: absolute;
+        left: 40px;
+        background-color: black;
+    }
+    .absolute.two {
+        position: absolute;
+        left: 40px;
+        background-color: orange;
+    }
+
+
+    .sticky {
+        position: sticky;
+        top: 100px;
+
+    }
+
+    .a-parent {
+        position: relative;
+    }
+</style>
+
+<body>
+
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+    <!-- <div class="children fixed"></div> -->
+
+    <div class="parent">
+        <div class="children static"></div>
+        <div class="p-relative">
+            <div class="children relative"></div>
+        </div>
+        <div class="a-parent">
+            <div class="children absolute"></div>
+            <div class="children absolute two"></div>
+        </div>
+        <div class="children fixed two"></div>
+
+    </div>
+    <!-- <div class="children sticky"></div> -->
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum omnis labore ad excepturi! Libero recusandae sed
+        cumque culpa quaerat, quod minus unde, magnam natus a possimus corporis dolor hic saepe.
+    </p>
+
+
+</body>
+
+</html>
