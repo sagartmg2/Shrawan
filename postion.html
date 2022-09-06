@@ -47,12 +47,13 @@
 
     .absolute {
         position: absolute;
-        left: 40px;
+        top:10px;
+        left: 30px;
         background-color: black;
     }
     .absolute.two {
         position: absolute;
-        left: 40px;
+        left: 80px;
         background-color: orange;
     }
 
@@ -65,6 +66,8 @@
 
     .a-parent {
         position: relative;
+        background-color: rgba(255,0,0,0.5);
+        height: 80vh;
     }
 </style>
 
@@ -97,10 +100,10 @@
             <div class="children relative"></div>
         </div>
         <div class="a-parent">
-            <div class="children absolute"></div>
+            <div class="children absolute one"></div>
             <div class="children absolute two"></div>
+            <div class="children fixed two"></div>
         </div>
-        <div class="children fixed two"></div>
 
     </div>
     <!-- <div class="children sticky"></div> -->
