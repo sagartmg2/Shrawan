@@ -13,13 +13,13 @@ const fs = require("fs") // common js
 // import fs from "fs" // es6 module systme
 
 // console.log(fs.readFileSync("./auth.js").toString())
+// const path = require("path") 
+// const process = require("process") 
 
 const auth = require("./auth")
-// auth.authenticate();
+auth.authenticate();
 
 const http = require("http")
-const { runInNewContext } = require("vm")
-
 
 const server = http.createServer((req, res) => {
     // console.log("here")
@@ -30,22 +30,67 @@ const server = http.createServer((req, res) => {
     // if(req.url)
 
     if (req.url == "/products") {
-
         if (req.method == "GET") {
-            let products = fs.readFileSync("./data.json")
-            res.write(products)
+            let buffer_data = fs.readFileSync("./data.json")
+            data = JSON.parse(buffer_data)
+
+            res.write(JSON.stringify(data.products));
+            // res.write(data.products)
             res.end();
         } else if (req.method === "POST") {
             console.log("insert in database. ");
-
             // first get the data from requts body. 
+            req.on("data", (chunk) => {
 
+                let request_data = JSON.parse(chunk)
+                let fs_data = fs.readFileSync("./data.json")
+                fs_data = JSON.parse(fs_data)
 
+                fs_data.products.push(request_data)
+
+                fs.writeFileSync("data.json", JSON.stringify(fs_data))
+
+                res.write(JSON.stringify(fs_data))
+                res.end();
+            })
+        } else if (req.method === "DELETE") {
+            req.on("data", (chunk) => {
+                let fs_data = fs.readFileSync("./data.json")
+
+                let request_data = JSON.parse(chunk)
+                fs_data = JSON.parse(fs_data)
+
+                fs_data.products = fs_data.products.filter(product => product.id != request_data.id)
+
+                // fs_data.products = fs_data.products.map(product => {
+                //     if (product.id == request_data.id) {
+                //         return {
+                //             id: request_data.id,
+                //             name: request_data.name,
+                //         }
+                //     }
+                //     return product
+                // })
+
+                fs.writeFileSync("data.json", JSON.stringify(fs_data))
+
+                res.write(JSON.stringify(fs_data))
+                res.end();
+            })
         }
+    } else if (req.url === "/users") {
+        if (req.method == "GET") {
+            let buffer_data = fs.readFileSync("./data.json")
+            data = JSON.parse(buffer_data)
+
+            res.write(JSON.stringify(data.users));
+            res.end();
+        }
+
     } else {
-        res.writeHead(500)
+        res.writeHead(404)
         // res.write("404 resource not found ")
-        res.write("Server error  ")
+        res.write("resource not found")
         res.end();
     }
 
