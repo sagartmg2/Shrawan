@@ -18,14 +18,125 @@
             font-family: 'BhuTuka Expanded One', cursive;
             font-family: 'Roboto', sans-serif;
         } */
+
+        /* .space{
+            margin-left:20px;
+            margin-right:20px;
+        }
+
+        @media( min-width:768px){
+            .space{
+                max-width: 720px;
+                margin-left: auto;
+                margin-right: auto;
+
+            }
+        } */
+
+        .child {
+            background-color: teal;
+            border: 1px solid;
+        }
+
+        .parent {
+            margin-top: 50px;
+            display: flex;
+        }
     </style>
 </head>
 
-<body class=" container ">
 
 
-    <div class="parent">
-        
+
+<body class="space container-mddd container-lgg container-fluid">
+
+    <form>
+        <div class="d-flexx row ">
+
+            <div class="mb-3 col-md-6">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check col-md-6">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+        </div>
+        <button type="submit" class="">Submit</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 576px = smmall desvice - 767px -->
+
+    <div class="parentt d-flexx row">
+        <div class=" col-12 col-sm-6 col-md-2 col-lg-8 col-xxl-1 child">col-1</div>
+        <div class="col-6 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col-1 child">col-1</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+        <div class="col child">one</div>
+
     </div>
 
     <h1>Lorem ipsum dolor sit</h1>
@@ -39,35 +150,49 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo illum quae
         optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
     </p>
-    <div class="one">
-        <h2>One</h2>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo illum
-            quae optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo illum
-            quae optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo illum
-            quae optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo illum
-            quae optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
-        </p>
-    </div>
-    <div class="two">
-        <h2>Two</h2>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo illum
-            quae
-            optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo illum
-            quae
-            optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo illum
-            quae
-            optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo illum
-            quae
-            optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
-        </p>
+    <div class="row">
+        <div class="one col-12 col-md-6 col-lg-4">
+            <h2>One</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo
+                illum
+                quae optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt
+                voluptatibus?
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo
+                illum
+                quae optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt
+                voluptatibus?
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo
+                illum
+                quae optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt
+                voluptatibus?
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo
+                illum
+                quae optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt
+                voluptatibus?
+            </p>
+        </div>
+        <div class="two col-12 col-md-6 col-lg-4">
+            <h2>Two</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo
+                illum
+                quae
+                optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo
+                illum
+                quae
+                optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo
+                illum
+                quae
+                optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, perspiciatis dolore fugiat explicabo
+                illum
+                quae
+                optio vitae ea totam at delectus earum ullam, vel doloribus voluptates odio quos incidunt voluptatibus?
+            </p>
+        </div>
     </div>
     <h3>Lorem ipsum dolor sit</h3>
     <p>
