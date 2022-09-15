@@ -1,9 +1,6 @@
 
 
-// function auth()
-// {
 
-// }
 
 const auth = () => {
     console.log("auth");
@@ -27,4 +24,25 @@ module.exports = {
     basename:basename
 }
 
+const authenticate = () => {
+    console.log("authentication....")
+
+}
+
+const checkSeller = () => {
+    console.log("authentication....")
+
+}
+
+
+// default export 
+module.exports = authenticate
+// module
+
+// module.exports.authenticate = authenticate
+
+module.exports = {
+    authenticate,
+    checkSeller
+}
 
