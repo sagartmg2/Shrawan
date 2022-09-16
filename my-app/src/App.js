@@ -1,5 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import Button from './Button';
+
+// import './css/styles.css'
+// import "./Custom.css"
 
 /* 
 default export 
@@ -13,30 +17,25 @@ named export
 // }
 
 
+// export default function App() {
+export function App() {
 
-export default function App() {
-  // export function App() {
+  // Button("login")
+  console.log("app-render");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p id={true ? "true" : "false"}>
-          hello world!!!
-          {
-            true ?
-              <p>true</p> :
-              <p>false</p>
-          }
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <Button
+        text="login"
+        color="teal"
+      />
+
+      <Button
+        text="create new account"
+        color="orange"
+      />
+    
     </div >
   );
 }
