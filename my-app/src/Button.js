@@ -9,7 +9,7 @@ export default function Button(props) {
 
     // console.log({ props })
     // return <button className="btn" style={btn_style}> {props.text} </button>
-    console.log("button-render");
+    // console.log("button-render");
     return <div>
         <button className="btn" style={{
             backgroundColor: props.color,

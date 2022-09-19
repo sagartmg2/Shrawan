@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Button from './Button';
+import ButtonClass from "./ButtonClass"
 
 // import './css/styles.css'
 // import "./Custom.css"
@@ -26,6 +27,12 @@ export function App() {
   return (
     <div className="App">
 
+      <ButtonClass
+        text="INCREMENT"
+        color="cyan"
+      />
+
+      <hr></hr>
       <Button
         text="login"
         color="teal"
@@ -35,7 +42,7 @@ export function App() {
         text="create new account"
         color="orange"
       />
-    
+
     </div >
   );
 }

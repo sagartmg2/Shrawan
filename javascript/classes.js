@@ -1,12 +1,15 @@
 
 /* 
-    OOP - object oriented programming.  (inherntence, encapsulation, polymorphism, abstraction. )
+    OOP - object oriented programming.  (
+        inherntence - method of data hiding,
+        abstraction  - method of implementaion / functionality hiding..
+         encapsulation,
+          polymorphism,
             java,php - string class based 
             javascript - both class and function
     Class
         - class is a blueprint of an object
 */
-
 
 // function Projector(brand) {
 //     return {
@@ -45,24 +48,27 @@ class Employee {
         // private bonous = 2000;
     }
 
+    // private bonus= 500;
     #bonous = 500;
 
+    calculateBonus() {
+        return (10 / 100 * this.salary)
+    }
+
     calculateSalary() {
-        console.log("total is " + (this.salary + this.#bonous));
+        console.log("total is " + (this.salary + this.calculateBonus()));
+        // console.log("total is " + (this.salary + this.#bonous));
     }
 
     // getter method
-    getBonus()
-    {
+    getBonus() {
         return this.#bonous;
     }
 
-    setBonus(value)
-    {
+    //setter method
+    setBonus(value) {
         this.#bonous = value;
     }
-
-    //setter method
 
 }
 
@@ -72,18 +78,15 @@ emp2.bonus = 200000;
 console.log(emp1);
 console.log(emp2);
 
-
-
-
 class Animal {
     constructor(name, sound) {
         this.name = name;
         this.sound = sound;
         this.legs_count = 4;
     }
-    
+
     makeSound() {
-        console.log("making sound..." + this.sound);
+        console.log("making sound.....parent..." + this.sound);
     }
 }
 
@@ -91,6 +94,18 @@ class Dog extends Animal {
     constructor() {
         super("Dog", "bark");
     }
+
+    // 
+    /* 
+    polymorphism
+        method overloading
+        method overriding...
+     */
+
+    makeSound(sound) {
+        console.log("barking...." + sound);
+    }
+
 }
 class Cat extends Animal {
     constructor() {
