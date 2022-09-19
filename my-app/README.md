@@ -1,4 +1,12 @@
 # Getting Started with Create React App
+
+![alt text](./1.png)
+
+![Alt text](../test.jpg)
+
+![Screenshot](../assets/1.png)
+![Screenshot](../assets/1.png "Title")
+
  - one
  - two
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
