@@ -5,11 +5,13 @@ class ButtonClass extends React.Component {
     constructor(props) {
         super(props)
 
-        // this.count_custom = 0;
+        this.count_custom = 0;
+
         this.state = {
             value: 100,
             count: 0,
             show: false,
+            todos: [],
         }
 
         this.handleClick = this.handleClick.bind(this)
@@ -30,8 +32,16 @@ class ButtonClass extends React.Component {
             value: this.state.value + 1,
             count: this.state.count + 1,
             show: true,
+            todos: ["one", "task two"]
         })
 
+    }
+
+    handleDelete(index) {
+        let todos = ["threee"]
+        this.setState({
+            todos
+        })
     }
 
 
@@ -53,6 +63,13 @@ class ButtonClass extends React.Component {
         // this.props.text = "changed....";
 
         return <>
+            {
+                this.state.todos.map((el, index) => {
+                    return <li onClick={this.handleDelete(index)}>{el}</li>
+                })
+            }
+            
+            {1 + 1 + 1}
             {
                 this.state.show
                 &&

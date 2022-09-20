@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form onsubmit="handleSubmit(event)">
+        <input type="text" name="todo" />
+        <button type="submit">add </button>
+    </form>
+    <div>
+        <ul id="items">
+        </ul>
+    </div>
+
+    <script>
+
+        let todos = [];
+        
+        function handleSubmit(event) {
+            event.preventDefault();
+            console.log("here");
+
+            todos.push(event.target.todo.value)
+            mapTodos();
+        }
+
+        function mapTodos() {
+            let str = ``;
+            todos.forEach((el, index) => {
+                str += `<li>${el}</li>  <button type="button" onclick="deleteItem(${index})">delete</button>`
+            })
+
+            document.getElementById("items").innerHTML = str;
+        }
+
+        function deleteItem(index) {
+            todos = todos.filter((el, i) => i != index)
+            mapTodos();
+        }
+
+    </script>
+
+
+</body>
+
+</html>
