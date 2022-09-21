@@ -34,14 +34,14 @@ export function App() {
 
       <hr></hr>
       <Button
-        text="login"
+        text="add todo"
         color="teal"
       />
 
-      <Button
+      {/* <Button
         text="create new account"
         color="orange"
-      />
+      /> */}
 
     </div >
   );
