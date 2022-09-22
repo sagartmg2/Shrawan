@@ -73,6 +73,8 @@ class ButtonClass extends React.Component {
         })
     }
 
+    /* life cylce methods */
+
     componentDidMount() {
         console.log("mounted.....");
     }

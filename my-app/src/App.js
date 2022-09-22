@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import Button from './Button';
 import ButtonClass from "./ButtonClass"
+import Todo from './Todo';
+import { useState } from 'react';
 
 // import './css/styles.css'
 // import "./Custom.css"
@@ -24,19 +26,30 @@ export function App() {
   // Button("login")
   console.log("app-render");
 
+  const [show, setShow] = useState(false);
+
   return (
     <div className="App">
+      <button onClick={() => setShow(!show)}>TOGGLE</button>
 
-      <ButtonClass
+      {
+        show
+        &&
+        <Todo
+          value="random_text"
+        />
+      }
+
+      {/* <ButtonClass
         text="INCREMENT"
         color="cyan"
-      />
+      /> */}
 
-      <hr></hr>
+      {/* <hr></hr>
       <Button
         text="add todo"
         color="teal"
-      />
+      /> */}
 
       {/* <Button
         text="create new account"
