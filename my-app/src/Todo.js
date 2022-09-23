@@ -16,12 +16,12 @@ class Todo extends Component {
         fetch(this.state.url)
             .then(response => response.json())
             .then(json => {
-                if (this.state.mount) {
+                // if (this.state.mount) {
                     this.setState({
                         todos: json,
                         called_once: true,
                     })
-                }
+                // }
             })
     }
 
@@ -55,7 +55,6 @@ class Todo extends Component {
         // if (!this.state.called_once) {
         //     this.fetchData();
         // }
-
 
         return (
             // <></>
