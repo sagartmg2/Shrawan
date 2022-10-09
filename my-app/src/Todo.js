@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 class Todo extends Component {
     constructor(props) {
@@ -17,10 +18,10 @@ class Todo extends Component {
             .then(response => response.json())
             .then(json => {
                 // if (this.state.mount) {
-                    this.setState({
-                        todos: json,
-                        called_once: true,
-                    })
+                this.setState({
+                    todos: json,
+                    called_once: true,
+                })
                 // }
             })
     }
@@ -79,7 +80,9 @@ class Todo extends Component {
                         this.state.todos.length > 0
                             ?
                             this.state.todos.map(el => {
-                                return <li>{el.title}</li>
+                                return <li><Link to={`/todos/${el.id}`}>{el.title}</Link></li>
+                                return <li><Link to={"/todos/" + el.id}>{el.title}</Link></li>
+                                return <li><Link to={"/todos/1"}>{el.title}</Link></li>
                             })
                             :
                             <>

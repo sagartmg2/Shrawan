@@ -13,6 +13,8 @@ import ButtonClass from "./ButtonClass"
 import Todo from './Todo';
 import User from './User';
 import Dashboard from './Dashboard';
+import Show from './Show';
+import ProtectedRoute from './ProtectedRoute';
 
 // import './css/styles.css'
 // import "./Custom.css"
@@ -44,6 +46,7 @@ export function App() {
         <li><Link to='/home'>home</Link></li>
         <li><Link to='/about'>about</Link></li>
         <li><Link to='/'>dashboard</Link></li>
+        <li><Link to='/admin'>aDMIN</Link></li>
         <li><Link to='/users'>users</Link></li>
         <li><Link to='/todos'>todos</Link></li>
       </ul>
@@ -55,12 +58,35 @@ export function App() {
           <Route path="new" element={<NewTeamForm />} />
           <Route index element={<LeagueStandings />} />
         </Route> */}
-        <Route path='/' element={<Dashboard />} />
+
+
+        <Route path="" element={<ProtectedRoute />}>
+          <Route path='/' element={<Dashboard />} />
+          <Route path='/admin' element={<h1>Admin</h1>} />
+        </Route>
+
+        <Route path='login' element={<h1>LOGIN COMPONENT</h1>} />
         <Route path='home' element={<h1>Home</h1>} />
         <Route path='about' element={<h1>About Us</h1>} />
         <Route path='contact' element={<h1>Contact</h1>} />
         <Route path='users' element={<User />} />
-        <Route path='todos' element={<Todo />} />
+
+        {/* <Route path='todos' element={<Todo />} />
+        <Route path='todos/:id' element={<Show />} />
+        <Route path='todos/featured' element={<h1>featured</h1>} /> */}
+
+        {/* <Route path="todos" element={<Todo />}> */}
+        <Route path="todos">
+          <Route index element={<Todo />} />
+          <Route path=":id" element={<Show />} />
+          <Route path="featured" element={<h1>featured</h1>} />
+        </Route>
+
+
+
+
+        {/* <Route path=":other" element={<h1>page not found</h1>} /> */}
+        <Route path="*" element={<h1>page not found</h1>} />
       </Routes>
 
       <button onClick={() => setShow(!show)}>TOGGLE</button>
