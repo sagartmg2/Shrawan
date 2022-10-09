@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 
-const ProtectedRoute = () => {
+const ProtectedRoute = (props) => {
 
     let navigate = useNavigate();
 
-    let login_status = true
-    
+    // let login_status = false
+    // const [login_status, setstate] = useState(true);
 
-    if (login_status) {
+    console.log("render- proteced route");
+    console.log("login_status", props.login_status);
+
+    if (props.login_status) {
         return < Outlet />
     }
 
