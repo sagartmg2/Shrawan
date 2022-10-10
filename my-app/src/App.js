@@ -16,6 +16,7 @@ import Dashboard from './Dashboard';
 import Show from './Show';
 import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
+import Signup from './Signup';
 
 // import './css/styles.css'
 // import "./Custom.css"
@@ -112,6 +113,7 @@ export function App() {
           <Route path='/admin' element={<h1>Admin</h1>} />
         </Route>
 
+        <Route path='signup' element={<Signup />} />
         <Route path='login' element={<Login setLoginStatus={setLoginStatus} />} />
         <Route path='home' element={<h1>Home</h1>} />
         <Route path='about' element={<h1>About Us</h1>} />

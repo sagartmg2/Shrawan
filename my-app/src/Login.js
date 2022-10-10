@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
 
@@ -16,6 +16,7 @@ const Login = (props) => {
         // TODO: api call   == > user  {
         //    name: role, address
         // }
+
         props.setLoginStatus(true)
 
         //   TODO: identify the route from which we got redirected.
@@ -34,6 +35,7 @@ const Login = (props) => {
                 <label>password :</label>
                 <input type="text" name="password" value={password} onChange={() => { }} />
                 <button type='submit'>login</button>
+                <p>not a user ? <Link to="/signup">signup</Link></p>
             </form>
         </div>
     );
