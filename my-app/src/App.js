@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -35,9 +35,25 @@ named export
 
 // export default function App() {
 
-export function Title(props) {
-  return < p > {props.login_status ? "logout" : "login"}</p >
+import { useContext } from "react";
+
+export const UserContext = createContext()
+
+
+export function Title() {
+  const user_context = useContext(UserContext);
+
+  console.log({ user_context })
+
+  return < p > {user_context.login_status ? "logout" : "login"}</p >
 }
+// export function Title(props) {
+//   const user_context = useContext(UserContext);
+
+//   console.log({ user_context })
+
+//   return < p > {props.login_status ? "logout" : "login"}</p >
+// }
 
 export function AuthButton(props) {
   return <button
@@ -54,9 +70,11 @@ export function AuthButton(props) {
       // props drilling
       login_status={props.login_status}
     />
-    
+
   </button>
 }
+
+
 
 
 export function App() {
@@ -72,68 +90,70 @@ export function App() {
 
   return (
     <div className="App">
+      <UserContext.Provider value={{login_status}}>
 
-      <ul style={{
-        listStyle: "none",
-        display: "flex",
-        justifyContent: "space-around"
-      }}>
-        <li><Link to='/home'>home</Link></li>
-        <li><Link to='/about'>about</Link></li>
-        <li><Link to='/'>dashboard</Link></li>
-        <li><Link to='/admin'>aDMIN</Link></li>
-        <li><Link to='/users'>users</Link></li>
-        <li><Link to='/todos'>todos</Link></li>
-        <li>
-          {
-            login_status
-              ?
-              <AuthButton
-                setLoginStatus={setLoginStatus}
-                login_status={login_status}
-              />
-              :
-              <Link to='/login'>login</Link>
-          }
-        </li>
+        <ul style={{
+          listStyle: "none",
+          display: "flex",
+          justifyContent: "space-around"
+        }}>
+          <li><Link to='/home'>home</Link></li>
+          <li><Link to='/about'>about</Link></li>
+          <li><Link to='/'>dashboard</Link></li>
+          <li><Link to='/admin'>aDMIN</Link></li>
+          <li><Link to='/users'>users</Link></li>
+          <li><Link to='/todos'>todos</Link></li>
+          <li>
+            {
+              login_status
+                ?
+                <AuthButton
+                  setLoginStatus={setLoginStatus}
+                  login_status={login_status}
+                />
+                :
+                <Link to='/login'>login</Link>
+            }
+          </li>
 
-      </ul>
-      <Link to={"google.com"}>google</Link>
+        </ul>
+        <Link to={"google.com"}>google</Link>
 
 
-      <Routes>
-        {/* <Route path="teams" element={<Teams />}>
+        <Routes>
+          {/* <Route path="teams" element={<Teams />}>
           <Route path=":teamId" element={<Team />} />
           <Route path="new" element={<NewTeamForm />} />
           <Route index element={<LeagueStandings />} />
         </Route> */}
 
-        <Route path="" element={<ProtectedRoute login_status={login_status} />}>
-          <Route path='/' element={<Dashboard />} />
-          <Route path='/admin' element={<h1>Admin</h1>} />
-        </Route>
+          <Route path="" element={<ProtectedRoute login_status={login_status} />}>
+            <Route path='/' element={<Dashboard />} />
+            <Route path='/admin' element={<h1>Admin</h1>} />
+          </Route>
 
-        <Route path='signup' element={<Signup />} />
-        <Route path='login' element={<Login setLoginStatus={setLoginStatus} />} />
-        <Route path='home' element={<h1>Home</h1>} />
-        <Route path='about' element={<h1>About Us</h1>} />
-        <Route path='contact' element={<h1>Contact</h1>} />
-        <Route path='users' element={<User />} />
+          <Route path='signup' element={<Signup />} />
+          <Route path='login' element={<Login setLoginStatus={setLoginStatus} />} />
+          <Route path='home' element={<h1>Home</h1>} />
+          <Route path='about' element={<h1>About Us</h1>} />
+          <Route path='contact' element={<h1>Contact</h1>} />
+          <Route path='users' element={<User />} />
 
-        {/* <Route path='todos' element={<Todo />} />
+          {/* <Route path='todos' element={<Todo />} />
         <Route path='todos/:id' element={<Show />} />
         <Route path='todos/featured' element={<h1>featured</h1>} /> */}
 
-        {/* <Route path="todos" element={<Todo />}> */}
-        <Route path="todos">
-          <Route index element={<Todo />} />
-          <Route path=":id" element={<Show />} />
-          <Route path="featured" element={<h1>featured</h1>} />
-        </Route>
+          {/* <Route path="todos" element={<Todo />}> */}
+          <Route path="todos">
+            <Route index element={<Todo />} />
+            <Route path=":id" element={<Show />} />
+            <Route path="featured" element={<h1>featured</h1>} />
+          </Route>
 
-        {/* <Route path=":other" element={<h1>page not found</h1>} /> */}
-        <Route path="*" element={<h1>page not found</h1>} />
-      </Routes>
+          {/* <Route path=":other" element={<h1>page not found</h1>} /> */}
+          <Route path="*" element={<h1>page not found</h1>} />
+        </Routes>
+      </UserContext.Provider>
 
       {/* <button onClick={() => setShow(!show)}>TOGGLE</button> */}
 

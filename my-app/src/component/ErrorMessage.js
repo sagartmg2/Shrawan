@@ -2,7 +2,11 @@ import React from 'react';
 
 const ErrorMessage = (props) => {
 
-    if (props.state[props.name]) {
+    // if (props.state[props.name]) {
+    //     return null;
+    // }
+
+    if(!props.errors[props.name] || props.state[props.name]){
         return null;
     }
 

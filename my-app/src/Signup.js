@@ -10,7 +10,6 @@ const Signup = () => {
     // const [password, setpassword] = useState("initialState");
     // const [phone, setphone] = useState("initialState");
 
-
     const [state, setState] = useState(
         {
             email: "",
@@ -22,7 +21,7 @@ const Signup = () => {
     )
 
     const [errors, setError] = useState({
-        email: "alraedy ",
+        email: "required ",
         username: " required..",
         password: "8 charcters"
     })
@@ -32,6 +31,7 @@ const Signup = () => {
 
         console.log(" call the api..");
 
+        // error response from api
         let errors = [
             {
                 "value": "",
@@ -40,6 +40,11 @@ const Signup = () => {
                 "location": "body"
             }
         ]
+
+        setError({
+            ...errors,
+            email: "the email field is already user"
+        })
 
         // console.log({ state });
         // console.log(e.target.password.value);
@@ -65,11 +70,9 @@ const Signup = () => {
         //     a:112312,
         // }
 
-
-
         setState({
             ...state,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.type == "checkbox" ? e.target.checked : e.target.value
         })
 
         // if (e.target.name == "username") {
@@ -88,16 +91,16 @@ const Signup = () => {
                 <div>
                     <label className='required-field'>username </label>
                     <input type="text" name='username' onChange={handleChange} value={state.username} />
-                    <ErrorMessage state={state} name="username" errors={errors}  />
+                    <ErrorMessage state={state} name="username" errors={errors} />
                 </div>
                 <div>
                     <label className='required-field'>email</label>
                     <input type="email" name='email' onChange={handleChange} value={state.email} />
-                    <ErrorMessage msg="required" state={state} name="email"  errors={errors} />
+                    <ErrorMessage msg="required" state={state} name="email" errors={errors} />
                 </div>
                 <div>
                     <label>password</label>
-                    <input type="passsword" name='password' onChange={handleChange} value={state.password}  errors={errors} />
+                    <input type="passsword" name='password' onChange={handleChange} value={state.password} errors={errors} />
                     {/* {
                         !state.password
                         &&
@@ -111,7 +114,12 @@ const Signup = () => {
                 </div>
                 <div>
                     <label htmlFor='terms'>Aggerree termss and conditions</label>
-                    <input id='terms' type="checkbox" name='terms' onChange={handleChange} value={state.terms} />
+
+                    <input id='terms' type="checkbox" name='terms' onChange={handleChange}
+                        // value={state.terms}
+                        checked={state.terms}
+                    />
+
                 </div>
                 <button type='submit' disabled={!state.terms}>submit </button>
             </form>
