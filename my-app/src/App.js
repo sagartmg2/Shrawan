@@ -36,15 +36,23 @@ named export
 // export default function App() {
 
 import { useContext } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import Home from './Home';
+
 
 export const UserContext = createContext()
 
 
 export function Title() {
   const user_context = useContext(UserContext);
+  const auth_store = useSelector((state) => state.auth.value)
+
+  console.log({ auth_store });
+
 
   console.log({ user_context })
 
+  return < p > {auth_store ? "logout" : "login"}</p >
   return < p > {user_context.login_status ? "logout" : "login"}</p >
 }
 // export function Title(props) {
@@ -75,8 +83,6 @@ export function AuthButton(props) {
 }
 
 
-
-
 export function App() {
 
   // Button("login")
@@ -86,12 +92,14 @@ export function App() {
 
   // const status = localStorage.getItem("logged_in")
 
+  // ROOT LEVEL STATE
   const [login_status, setLoginStatus] = useState(JSON.parse(localStorage.getItem("logged_in")) || false);
+  const [cart, setCart] = useState([]);
+  const [user, setUser] = useState({});
 
   return (
     <div className="App">
-      <UserContext.Provider value={{login_status}}>
-
+      <UserContext.Provider value={{ login_status, setLoginStatus,cart, setCart, user,setUser }}>
         <ul style={{
           listStyle: "none",
           display: "flex",
@@ -134,7 +142,7 @@ export function App() {
 
           <Route path='signup' element={<Signup />} />
           <Route path='login' element={<Login setLoginStatus={setLoginStatus} />} />
-          <Route path='home' element={<h1>Home</h1>} />
+          <Route path='home' element={<Home />} />
           <Route path='about' element={<h1>About Us</h1>} />
           <Route path='contact' element={<h1>Contact</h1>} />
           <Route path='users' element={<User />} />
