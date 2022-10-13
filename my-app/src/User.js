@@ -15,12 +15,19 @@ const User = () => {
     // function fetchData() {
     //     // console.log("fetch data...");
     //     fetch(url)
+            // {
+            //     method: get 
+            // }
     //         .then(response => response.json())
     //         .then(json => {
     //             // console.log("set user..");
     //             setUser(json)
     //         });
     // }
+
+    // CRUD
+    // GET
+    
 
     // // componentDidMount(){
     // // }
