@@ -14,8 +14,43 @@ import Order from './page/Order';
 import ProtectedRoute from './component/ProtectedRoute';
 import Login from './page/Login';
 import Signup from './page/Signup';
+import "./App.css"
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUserStore } from './redux/reducer/user';
 
 function App() {
+
+  let dispatch = useDispatch()
+
+
+  useEffect(() => {
+
+    let access_token = localStorage.getItem("access_token")
+
+    if (access_token) {
+
+      axios.get("https://mern-ecommerce70.herokuapp.com/api/users/get-user", {
+        headers: {
+          Authorization: `Bearer ${access_token}`
+        }
+      })
+        .then(res => {
+
+          // CHANGE redux logged state to login
+
+          dispatch(setUserStore(res.data))
+
+        })
+        .catch(err => {
+
+        })
+    }
+
+
+  }, []);
+
   return (
     <div>
       <Navbar />

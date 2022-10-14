@@ -1,10 +1,13 @@
 import React from 'react';
 import { Outlet, Navigate } from "react-router-dom"
+import {useSelector} from "react-redux"
 
 const ProtectedRoute = () => {
-    let login_status = false
+    
+    const {user,logged_status}= useSelector((state) => state.user)
+    // useSelet
 
-    if (login_status) {
+    if (logged_status) {
         return < Outlet />
     }
 
