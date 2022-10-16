@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
-
+import { setUserStore } from '../redux/reducer/user';
+import { useDispatch } from "react-redux"
 const Login = () => {
 
 
@@ -23,6 +24,7 @@ const Login = () => {
     )
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -34,17 +36,20 @@ const Login = () => {
 
         // promise (pending resolve  reject  )
 
-        axios.post(url, data)
+        axios.post(url, data, {})
             .then((res) => {
                 //  status code 200 line
-                console.log({ res })
+                axios.get("https://mern-ecommerce70.herokuapp.com/api/users/get-user", {
+                    headers: {
+                        Authorization: `Bearer ${res.data.access_token}`
+                    }
+                })
+                    .then(user_res => {
+                        localStorage.setItem("access_token", res.data.access_token)
+                        dispatch(setUserStore(user_res.data))
+                        navigate("/")
 
-                //  TODO: redirect to login page
-
-                localStorage.setItem("access_token",res.data.access_token)
-
-                navigate("/")
-
+                    })
             })
             .catch((err) => {
                 // 400

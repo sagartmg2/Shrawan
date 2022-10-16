@@ -1,13 +1,29 @@
 import React from 'react';
 import { Outlet, Navigate } from "react-router-dom"
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux"
 
 const ProtectedRoute = () => {
-    
-    const {user,logged_status}= useSelector((state) => state.user)
-    // useSelet
 
-    if (logged_status) {
+    console.log("protected - route ")
+
+    const { user } = useSelector((state) => state.user)
+
+    /* 
+
+        FALSY VALUES
+            false 
+            0
+            NaN  
+            ""
+            null
+            undefined
+
+    */
+    // if ({}) {
+
+    // }
+
+    if (user) {
         return < Outlet />
     }
 

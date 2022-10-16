@@ -1,7 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    value: []
+    value: [
+
+        // {
+        //     _id,
+        //     quantity,
+        // }
+        
+    ]
     // logged_status : true,
     // user:{}
 }

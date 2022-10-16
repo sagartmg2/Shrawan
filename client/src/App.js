@@ -19,11 +19,12 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUserStore } from './redux/reducer/user';
+import { useState } from 'react';
 
 function App() {
 
   let dispatch = useDispatch()
-
+  const [user_response_status, setUserResponseStatus] = useState(false);
 
   useEffect(() => {
 
@@ -37,16 +38,17 @@ function App() {
         }
       })
         .then(res => {
-
+          setUserResponseStatus(true)
           // CHANGE redux logged state to login
-
           dispatch(setUserStore(res.data))
-
         })
         .catch(err => {
-
+          setUserResponseStatus(true)
         })
+    } else {
+      setUserResponseStatus(true)
     }
+
 
 
   }, []);
@@ -54,27 +56,34 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path="" element={<ProtectedRoute />}>
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/order' element={<Order />} />
-        </Route>
-        <Route path='/admin' element={<h1>Admin</h1>} />
-        {/* </Route> */}
+      {
+        user_response_status
+          ?
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path="" element={<ProtectedRoute />}>
+              <Route path='/cart' element={<Cart />} />
+              <Route path='/order' element={<Order />} />
+            </Route>
+            <Route path='/admin' element={<h1>Admin</h1>} />
+            {/* </Route> */}
 
-        <Route path='login' element={<Login />} />
-        <Route path='signup' element={<Signup />} />
-        {/* 
+            <Route path='login' element={<Login />} />
+            <Route path='signup' element={<Signup />} />
+            {/* 
           <Route path='home' element={<Home />} /> */}
-        {/* <Route path='users' element={<User />} />
+            {/* <Route path='users' element={<User />} />
             <Route index element={<Todo />} />
             <Route path=":id" element={<Show />} />
             <Route path="featured" element={<h1>featured</h1>} />
           </Route> */}
 
-        <Route path="*" element={<h1>page not found</h1>} />
-      </Routes>
+            <Route path="*" element={<h1>page not found</h1>} />
+          </Routes>
+          :
+          <h1>loading....</h1>
+      }
+
     </div>
   );
 }
