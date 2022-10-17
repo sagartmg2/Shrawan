@@ -4,10 +4,13 @@ const initialState = {
     value: [
 
         // {
-        //     _id,
-        //     quantity,
+        //     _id: 1123,
+        //     quantity: 0,
+        // },
+        // {
+
         // }
-        
+
     ]
     // logged_status : true,
     // user:{}
@@ -20,28 +23,32 @@ export const cartSlice = createSlice({
         setCartStore: (state) => {
             state.value = [{ id: 1, name: "store value changed..." }]
         },
-        // logoout: (state) => {
-        //     localStorage.setItem("logged_in", false)
-        //     state.value = false
-        // },
 
-        // increment: (state) => {
-        //     // Redux Toolkit allows us to write "mutating" logic in reducers. It
-        //     // doesn't actually mutate the state because it uses the Immer library,
-        //     // which detects changes to a "draft state" and produces a brand new
-        //     // immutable state based off those changes
-        //     state.value += 1
-        // },
-        // decrement: (state) => {
-        //     state.value -= 1
-        // },
-        // incrementByAmount: (state, action) => {
-        //     state.value += action.payload
-        // },
+        addToCart: (state, action) => {
+            let cart_items = state.value;
+
+            // if product already exists, update quantity else add to cart_items
+
+            let status = cart_items.find(el => el._id == action.payload._id);   // { _id}
+
+            if (status) {
+                cart_items.map(item => {
+                    let obj = {}
+                    if (item._id == action.payload._id) {
+                        obj = item;
+                        obj.quantity = obj.quantity + 1
+                    }
+                })
+            } else {
+                cart_items.push({ ...action.payload, quantity: 1 })
+            }
+            state.value = cart_items
+
+        }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setCartStore } = cartSlice.actions
+export const { setCartStore, addToCart } = cartSlice.actions
 
 export default cartSlice.reducer

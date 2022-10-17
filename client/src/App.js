@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUserStore } from './redux/reducer/user';
 import { useState } from 'react';
+import Show from './page/Product/Show';
 
 function App() {
 
@@ -70,13 +71,9 @@ function App() {
 
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />
-            {/* 
-          <Route path='home' element={<Home />} /> */}
-            {/* <Route path='users' element={<User />} />
-            <Route index element={<Todo />} />
-            <Route path=":id" element={<Show />} />
-            <Route path="featured" element={<h1>featured</h1>} />
-          </Route> */}
+            <Route path='products'>
+              <Route path=":id" element={<Show />} />
+            </Route>
 
             <Route path="*" element={<h1>page not found</h1>} />
           </Routes>
