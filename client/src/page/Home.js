@@ -3,22 +3,38 @@ import React, { useEffect, useState } from 'react';
 import { addToCart } from '../redux/reducer/cart';
 import { useDispatch } from "react-redux"
 import { Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 
 const Home = () => {
     const dispatch = useDispatch();
 
 
+
+    // === 
+
+
     const [search_term, setSearchTerm] = useState("");
+
+    // const [meta_data, setProductsMetaData] = useState({
+    // });
+    const [total, setTotal] = useState(0)
+    const [page, setPage] = useState(1)
+    const [per_page, setPerPage] = useState(25)
+
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
 
-        axios.get(`https://mern-ecommerce70.herokuapp.com/api/products?search_term=${search_term}` )
+        axios.get(`https://mern-ecommerce70.herokuapp.com/api/products?search_term=${search_term}&page=${page}`)
             .then(res => {
                 setProducts(res.data.data[0].data)
+                let { total, per_page, page } = res.data.data[0].metadata[0]
+                setTotal(total)
+                setPage(page)
+                setPerPage(per_page)
             })
 
-    }, [search_term]);
+    }, [search_term,page,per_page]);
 
     function handleAddToCart(product) {
 
@@ -65,6 +81,18 @@ const Home = () => {
 
                     })
                 }
+                <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="next >"
+                    onPageChange={(e) => {
+                        setPage((e.selected + 1))
+                    }}
+                    pageRangeDisplayed={per_page}
+                    pageCount={((total / per_page))}
+                    // pageCount={5}
+                    previousLabel="< previous"
+                    renderOnZeroPageCount={null}
+                />
             </div>
         </div>
     );

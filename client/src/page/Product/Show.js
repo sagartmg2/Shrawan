@@ -28,6 +28,9 @@ const Show = () => {
                     <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             {/* TODO: make images dynamic. */}
+                            {/* {
+                                product.map()
+                            } */}
                             <div className="carousel-item active">
                                 <img src="https://res.cloudinary.com/dtv8dtpkm/image/upload/v1661132352/rycvji7yccwibgpdr86k.png" className="d-block w-100" alt="..."/>
                             </div>

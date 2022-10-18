@@ -21,6 +21,7 @@ import { useDispatch } from 'react-redux';
 import { setUserStore } from './redux/reducer/user';
 import { useState } from 'react';
 import Show from './page/Product/Show';
+import Create from './page/Product/Create';
 
 function App() {
 
@@ -62,7 +63,7 @@ function App() {
           ?
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path="" element={<ProtectedRoute />}>
+            <Route path="" element={<ProtectedRoute role="buyer" />}>
               <Route path='/cart' element={<Cart />} />
               <Route path='/order' element={<Order />} />
             </Route>
@@ -73,6 +74,10 @@ function App() {
             <Route path='signup' element={<Signup />} />
             <Route path='products'>
               <Route path=":id" element={<Show />} />
+              <Route path="" element={<ProtectedRoute role="seller" />}>
+                <Route path="create" element={< Create />} />
+              </Route>
+
             </Route>
 
             <Route path="*" element={<h1>page not found</h1>} />
