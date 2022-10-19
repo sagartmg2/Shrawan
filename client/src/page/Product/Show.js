@@ -1,10 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import useAuthenticate from '../../hook/useAuthenticate';
 
 const Show = () => {
 
+    const {handleFunction} = useAuthenticate();
+
     const [product, setProduct] = useState({});
+
+    let navigatge = useNavigate()
+
+    // product.revies = undefined
 
     // product info 
     // https://mern-ecommerce70.herokuapp.com/api/products/6302de41aedde6d0bd3779cc
@@ -32,10 +40,10 @@ const Show = () => {
                                 product.map()
                             } */}
                             <div className="carousel-item active">
-                                <img src="https://res.cloudinary.com/dtv8dtpkm/image/upload/v1661132352/rycvji7yccwibgpdr86k.png" className="d-block w-100" alt="..."/>
+                                <img src="https://res.cloudinary.com/dtv8dtpkm/image/upload/v1661132352/rycvji7yccwibgpdr86k.png" className="d-block w-100" alt="..." />
                             </div>
                             <div className="carousel-item">
-                                <img src="http://res.cloudinary.com/dtv8dtpkm/image/upload/v1661132353/c65w92ivmajs3azflxmp.png" className="d-block w-100" alt="..."/>
+                                <img src="http://res.cloudinary.com/dtv8dtpkm/image/upload/v1661132353/c65w92ivmajs3azflxmp.png" className="d-block w-100" alt="..." />
                             </div>
                         </div>
                         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -55,6 +63,34 @@ const Show = () => {
                     <p>{product.description}</p>
                 </div>
             </div>
+            <hr />
+            <h1>Reviews</h1>
+
+            {/* optional chaining  ?. */}
+            {
+                product.reviews?.map(el => {
+                    return <li>{el.comment}</li>
+                })
+            }
+            <form onSubmit={(e) => {
+                e.preventDefault()
+
+                // custom hook
+
+                let callback  = () => {
+                    console.log("review added ");
+                }   
+
+                handleFunction(callback);
+
+                // if (!user) {
+                //     navigatge("/login")
+
+                // }
+
+            }}>
+                <button>add review</button>
+            </form>
         </div>
     );
 }

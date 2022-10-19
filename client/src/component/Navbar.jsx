@@ -1,7 +1,14 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { BUYER } from '../constant/role';
+import CheckRole from './CheckRole';
 
 const Navbar = () => {
+
+    const navigate = useNavigate();
+
+    // const [state, setstate] = useState(initialState);
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -13,12 +20,28 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link to="/" className='nav-link' >Home</Link>
                         </li>
-                        
+
+                        {/* <CheckRole role="buyer" /> */}
+                        {/* <Button color="red" /> */}
+
+                        <CheckRole role={BUYER}>
+                            <li className="nav-item">
+                                <Link to="/cart" className='nav-link' >Cart</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/order" className='nav-link' >Order</Link>
+                            </li>
+                        </CheckRole>
                         <li className="nav-item">
-                            <Link to="/cart" className='nav-link' >Cart</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/order" className='nav-link' >Order</Link>
+                            <Link to="cart" className='nav-link' onClick={(e) => {
+                                e.preventDefault();
+                                console.log("logout");
+                                localStorage.removeItem("access_token")
+                                navigate("/login")
+                                console.log("after...");
+                                // TODO: clear user from redux too. 
+                            }}>logout</Link>
+
                         </li>
                     </ul>
                     {/* <form className="d-flex">

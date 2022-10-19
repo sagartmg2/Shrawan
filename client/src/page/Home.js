@@ -1,17 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { addToCart } from '../redux/reducer/cart';
-import { useDispatch } from "react-redux"
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import useAuthenticate from '../hook/useAuthenticate';
 
 const Home = () => {
+
+    const { handleFunction } = useAuthenticate()
+
     const dispatch = useDispatch();
 
+    // let navigatge = useNavigate()
 
-
-    // === 
-
+    // const { user } = useSelector((state) => state.user)
 
     const [search_term, setSearchTerm] = useState("");
 
@@ -34,12 +37,22 @@ const Home = () => {
                 setPerPage(per_page)
             })
 
-    }, [search_term,page,per_page]);
+    }, [search_term, page, per_page]);
 
     function handleAddToCart(product) {
 
+        // if (!user) {    
+        //     navigatge("/login")
+        // }
+
+        let callback = () => {
+            dispatch(addToCart(product))
+        }
+
+        handleFunction(callback);
+
         // TODO: connect with redux
-        dispatch(addToCart(product))
+
     }
 
 

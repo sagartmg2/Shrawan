@@ -22,6 +22,8 @@ import { setUserStore } from './redux/reducer/user';
 import { useState } from 'react';
 import Show from './page/Product/Show';
 import Create from './page/Product/Create';
+import { BUYER, SELLER } from './constant/role';
+
 
 function App() {
 
@@ -63,7 +65,7 @@ function App() {
           ?
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path="" element={<ProtectedRoute role="buyer" />}>
+            <Route path="" element={<ProtectedRoute role={BUYER} />}>
               <Route path='/cart' element={<Cart />} />
               <Route path='/order' element={<Order />} />
             </Route>
@@ -74,7 +76,7 @@ function App() {
             <Route path='signup' element={<Signup />} />
             <Route path='products'>
               <Route path=":id" element={<Show />} />
-              <Route path="" element={<ProtectedRoute role="seller" />}>
+              <Route path="" element={<ProtectedRoute role={SELLER} />}>
                 <Route path="create" element={< Create />} />
               </Route>
 
