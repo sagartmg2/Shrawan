@@ -6,7 +6,7 @@ import useAuthenticate from '../../hook/useAuthenticate';
 
 const Show = () => {
 
-    const {handleFunction} = useAuthenticate();
+    const { handleFunction } = useAuthenticate();
 
     const [product, setProduct] = useState({});
 
@@ -68,18 +68,22 @@ const Show = () => {
 
             {/* optional chaining  ?. */}
             {
-                product.reviews?.map(el => {
-                    return <li>{el.comment}</li>
-                })
+                product.reviews?.length > 0
+                    ?
+                    product.reviews?.map(el => {
+                        return <li>{el.comment}</li>
+                    })
+                    :
+                    <p>no reviews yet</p>
             }
             <form onSubmit={(e) => {
                 e.preventDefault()
 
                 // custom hook
 
-                let callback  = () => {
+                let callback = () => {
                     console.log("review added ");
-                }   
+                }
 
                 handleFunction(callback);
 
@@ -89,7 +93,7 @@ const Show = () => {
                 // }
 
             }}>
-                <button>add review</button>
+                <button className='btn btn-primary'>add review</button>
             </form>
         </div>
     );

@@ -23,11 +23,15 @@ const Login = () => {
         }
     )
 
+    const [show_spinner, setShowSpinner] = useState(false);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        setShowSpinner(true)
         // api call
 
         let url = "https://mern-ecommerce70.herokuapp.com/api/users/login"
@@ -80,7 +84,15 @@ const Login = () => {
                     <label htmlFor="exampleInputEmail1" className="form-label">Password</label>
                     <input type="password" className="form-control" id="" onChange={handleChange} name="password" value={state.password} aria-describedby="emailHelp" />
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary" disabled={show_spinner}>
+                    {
+                        show_spinner
+                        &&
+                        <div class="spinner-border spinner-border-sm mx-2" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    }
+                    Submit</button>
                 <p>not a user <Link to="/signup">signup</Link></p>
             </form>
         </div>

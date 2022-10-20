@@ -1,11 +1,16 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
-import { BUYER } from '../constant/role';
+import { BUYER, SELLER } from '../constant/role';
+import { setUserStore } from '../redux/reducer/user';
 import CheckRole from './CheckRole';
 
 const Navbar = () => {
 
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
+    const { user } = useSelector((state) => state.user)
 
     // const [state, setstate] = useState(initialState);
 
@@ -32,17 +37,30 @@ const Navbar = () => {
                                 <Link to="/order" className='nav-link' >Order</Link>
                             </li>
                         </CheckRole>
-                        <li className="nav-item">
-                            <Link to="cart" className='nav-link' onClick={(e) => {
-                                e.preventDefault();
-                                console.log("logout");
-                                localStorage.removeItem("access_token")
-                                navigate("/login")
-                                console.log("after...");
-                                // TODO: clear user from redux too. 
-                            }}>logout</Link>
+                        <CheckRole role={SELLER}>
+                            <li className="nav-item">
+                                <Link to="/products/create" className='nav-link' >Add Product</Link>
+                            </li>
+                        </CheckRole>
 
-                        </li>
+                        {
+                            user
+                            &&
+                            <li className="nav-item">
+                                <Link to="#" className='nav-link' onClick={(e) => {
+                                    e.preventDefault();
+                                    console.log("logout");
+                                    localStorage.removeItem("access_token")
+                                    navigate("/login")
+                                    console.log("after...");
+
+                                    // TODO: clear user from redux too. 
+                                    dispatch(setUserStore(null))
+
+                                }}>logout</Link>
+
+                            </li>
+                        }
                     </ul>
                     {/* <form className="d-flex">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
