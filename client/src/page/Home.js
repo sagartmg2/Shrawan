@@ -8,6 +8,8 @@ import useAuthenticate from '../hook/useAuthenticate';
 
 import no_image_found from "../asset/image/No-image-found.jpg"
 
+import { job_data } from "../data/jobs"
+
 const Home = () => {
 
     const { handleFunction } = useAuthenticate()
@@ -17,7 +19,6 @@ const Home = () => {
     // let navigatge = useNavigate()
 
     // const { user } = useSelector((state) => state.user)
-
 
     /* 
         primitive datatype
@@ -41,7 +42,24 @@ const Home = () => {
     const [per_page, setPerPage] = useState(25)
     const [products, setProducts] = useState([]);
 
-    let meta_data_obj = useMemo(() => () => { return meta_data }, [meta_data])
+    let meta_data_obj = useMemo(() => meta_data, [meta_data])
+
+    // let meta_data_obj2 = useMemo(() =>{return {...meta_data_obj}},[meta_data_obj])
+
+    const calculate = (num) => {
+        for (let i = 0; i < 1000000000; i++) {
+
+        }
+        return num * 2;
+    }
+
+    // let result = useMemo(() => calculate(meta_data.page),[meta_data.page])
+    // let result = calculate(meta_data.page);
+    // let result = "";
+
+    console.log("render..");
+
+    const [jobs, setjobs] = useState([]);
 
     useEffect(() => {
 
@@ -55,8 +73,10 @@ const Home = () => {
                 // setPerPage(per_page)
             })
 
-        // }, [search_term, page, per_page, meta_data]);
+        setjobs(job_data)
+
     }, [search_term, page, per_page, meta_data.page]);
+
 
     function handleAddToCart(product) {
 
@@ -73,7 +93,6 @@ const Home = () => {
         // TODO: connect with redux
 
     }
-
 
     return (
         <div className='container'>
@@ -93,7 +112,9 @@ const Home = () => {
                      max price 
                      rating
 
-             */}
+        */}
+
+            {/* <h1>{result}</h1> */}
 
             <div className='row'>
                 {

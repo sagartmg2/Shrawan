@@ -40,6 +40,15 @@ const Login = () => {
 
         // promise (pending resolve  reject  )
 
+        let user_data;
+        
+        // if (role = "compnay") {
+        //     user_data = { id: 1, name: "user", role: "company" }
+        // } else {
+        //     user_data = { id: 1, name: "user", role: "job-seeker" }
+
+        // }
+
         axios.post(url, data, {})
             .then((res) => {
                 //  status code 200 line

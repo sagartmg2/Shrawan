@@ -83,10 +83,19 @@ const Cart = () => {
                             </tr>
                         })
                     }
-                    < tr >
-                        <td colSpan={4} className="text-align-center text-center">Total</td>
-                        <td >1212</td>
-                    </tr>
+                    {
+                        cart_items.length > 0
+                            ?
+                            < tr >
+                                <td colSpan={4} className="text-align-center text-center">Total</td>
+                                <td >1212</td>
+                            </tr>
+                            :
+                            <tr>
+                                <p>no cart - items</p>
+                            </tr>
+                    }
+
 
                 </tbody>
             </table>
