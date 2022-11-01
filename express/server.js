@@ -54,51 +54,136 @@ app.use((req, res, next) => {
 })
 
 
-app.use((req, res, next) => {
-    // check if req has token
-    // req.token = asdfadsfadfs
-    let token ="asdfasdfadsfadsfa"
+// app.use((req, res, next) => {
+//     // check if req has token
+//     // req.token = asdfadsfadfs
+//     let token ="asdfasdfadsfadsfa"
 
-    // verify the request token by jsonwebtoken package
+//     // verify the request token by jsonwebtoken package
 
-    let status = false
+//     let status = false
 
-    if (status) {
-        next()
-        return;
-        console.log("after return")
+//     if (status) {
+//         next()
+//         return;
+//         console.log("after return")
+//     }
+
+//     res.statusCode = 401;
+//     /* 
+//         401 - unauthenticated
+//         403 - unauthorized.
+//     */
+//     res.send("eroor 401 unauntenciated..")
+
+// })
+
+
+// app.use((req, res, next) => {
+//     console.log("second global middelware ");
+//     next()
+// })
+
+
+const auth = (req, res, next) => {
+    console.log("middleware");
+
+    let logged_in = true;
+    if (logged_in) {
+        next();
+        return
     }
-    
-    res.statusCode = 401;
-    /* 
-        401 - unauthenticated
-        403 - unauthorized.
-    */
-    res.send("eroor 401 unauntenciated..")
+    res.status(401).send("unauthenticated")
+    // res.send({msg:"success"})
+}
 
-})
+// app.use(auth)
 
+/* 
+    200,
+    3 - redirect
+    4 - client error
+        400 - bad request 
+        401 - unauthenticated 
+        403 - forbidden / unauthrozied
+        404 - resoruce not found
+    500 - server error 
 
-app.use((req, res, next) => {
-    console.log("second global middelware ");
-    next()
-})
+*/
 
-app.get("/auth", (req, res) => {
+app.get("/auth", auth, (req, res) => {
     res.send("authenticated.")
+})
+const path = require("path")
+
+app.use(express.static('public'))
+// import { engine } from 'express-handlebars';
+const { engine } = require('express-handlebars');
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+
+
+app.get("/html", (req, res) => {
+
+    let names = [
+        { id: 1, name: "Ramm" },
+        { id: 2, name: "Shyamm" },
+    ]
+
+    console.log(__dirname)
+    console.log(path.join(__dirname, "../index.html"))
+    res.setHeader('content-type', 'text/html');
+    // res.setHeader('content-type', 'application/json');
+
+    res.render('custom', {
+        name: names.find(el => el.id == 2).name
+    });
+
+    return;
+
+
+    res.sendFile(path.join(__dirname, "../index.html"))
+    // res.send(names.find(el => el.id == 2))
+    // res.send()
+})
+
+app.get("/home", (req, res) => {
+
+    try {
+        let a = b + c;
+        res.send("home")
+
+    }
+    catch (err) {
+        res.status(500).send({
+            data: "Server Error"
+        })
+    }
+
 })
 
 
 app.post("/orders", (req, res) => {
-
     console.log("req.body =", req.body);
-    res.send("orders")
+    res.send(["orders", {}])
 })
 
-app.get("/orders", (req, res) => {
+app.get("/orders", auth, (req, res, next) => {
+    try {
+        let a = b + c;
+        console.log("req.body =", req.body);
+        res.send(["orders", "next order"])
+    }
+    catch (err) {
+        console.log("err");
+        next(err)
+        // res.status(500).send({
+        //     data: "Server Error"
+        // })
+    }
 
-    console.log("req.body =", req.body);
-    res.send("orders")
 })
 
 
@@ -110,6 +195,9 @@ app.get("/products/:id", (req, res) => {
 
 
 app.get('/', function (req, res) {
+
+    let a = b + c;
+
     res.send('Hello World')
 })
 
@@ -132,8 +220,23 @@ const storeProduct = (req, res) => {
 
 */
 
-
 app.post("/products", storeProduct)
+
+
+app.use((req, res) => {
+    res.status(404).send({
+        msg: "resource not found"
+    })
+})
+
+app.use((err, req, res, next) => {
+    res.status(500).send({
+        data: "Server Error",
+        msg: err.message
+    })
+})
+
+
 
 app.listen(8000, (data, err) => {
     console.log("listening....");
