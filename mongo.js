@@ -227,10 +227,12 @@ db.books.aggregate([{ title: "python" }])
 //     $unwind: "$author"
 // },
 
-
 db.books.aggregate([
     {
         $group:{_id:"$title"}
+    },
+    {
+        $sort:{}
     }
 ])
 
