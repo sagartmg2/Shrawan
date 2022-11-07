@@ -1,18 +1,28 @@
 db.authors.insertOne({})
+
+
 db.authors.insertMany([
     {
-        name: "second ram",
+        name: " mr. python",
         age: 30,
-        awards: ["grammy", "golden"]
-    },
-    {
-        name: "second shyam",
-        age: 100,
-        awards: ["grammy", ""]
+        awards: ["grammy", "golden"],
+        phone: "988",
+        website: "htpp..."
 
     },
     {
-        name: "second hari",
+        name: "mr. react",
+        age: 100,
+        awards: ["grammy", ""],
+        books: [
+            {
+                title: "python"
+            }
+        ]
+
+    },
+    {
+        name: "mr. js",
         age: 100,
         awards: ["golden", ""]
 
@@ -22,6 +32,7 @@ db.authors.insertMany([
         age: 100,
     }
 ])
+
 db.authors.deleteMany({})
 
 
@@ -32,6 +43,7 @@ db.authors.find({ name: "Ram" })
 db.authors.find({ name: "hari" })
 db.authors.find({ name: RegExp("Ram", "i") })
 db.authors.find({ name: RegExp("Ram", "i") }, { name: 1, _id: 0 })
+db.authors.find({ name: /Ram/i })
 
 db.authors.updateOne({ name: "ram" }, { name: "john" })
 db.authors.updateOne({ name: "ram" }, { $set: { name: "john" } })
@@ -118,7 +130,129 @@ db.authors.find({
 })
 
 db.authors.find({ awards: { $not: { $exists: 0 } } }).limit(25).skip(2)
-db.authors.find({ })
-db.authors.find({ }).skip(2)
+db.authors.find({})
+db.authors.find({}).skip(2)
 
 //  aggegation pipeline
+db.authors.find().sort({ age: 1 })
+
+
+
+
+db.books.deleteMany({})
+
+db.books.insertMany([
+    {
+        title: "python",
+        author_id: ObjectId("636781caf1889bfa806bd36d"),
+        author: {
+            name: "mr.python",
+            phone: "977"
+        }
+    },
+    {
+        title: "React",
+        author: {
+            name: "mr.react",
+            phone: "977"
+        },
+        author_id: ObjectId("636781caf1889bfa806bd36e")
+
+    },
+    {
+        title: "JS",
+        _id: "secret"
+    },
+    {
+        title: "ML",
+        author_id: ObjectId("636781caf1889bfa806bd36d"),
+        author: {
+            name: "mr.python",
+            phone: "977"
+        }
+    },
+    {
+        title: "DATA science",
+        author_id: ObjectId("636781caf1889bfa806bd36d"),
+        author: {
+            name: "mr.python",
+            phone: "977"
+        }
+    }
+])
+
+db.books.find({ title: "python" })
+db.books.find({ _id: "secret" })
+
+
+db.books.find({ _id: ObjectId("63677fbff1889bfa806bd363") })
+
+
+
+
+/* 
+    aggregation framework || aggregation pipeline
+
+    => advance find 
+
+*/
+
+db.books.find({ author_id: "636781caf1889bfa806bd36d", title: "python" })
+
+db.books.aggregate([{ title: "python" }])
+
+
+// {
+//     $match: { author_id: "636781caf1889bfa806bd36d" }
+// },
+// {
+//     $match: { title: "python" }
+// },
+// {
+//     $match: { author_id: ObjectId("636781caf1889bfa806bd36d") }
+// },
+// {
+//     $match: { title: "python" }
+// },
+
+// {
+//     $lookup: {
+//         from: "authors",
+//         localField: "author_id",
+//         foreignField: "_id",
+//         as: "author"
+//     }
+// },
+// {
+//     $unwind: "$author"
+// },
+
+
+db.books.aggregate([
+    {
+        $group:{_id:"$title"}
+    }
+])
+
+db.books.aggregate([
+    {
+        $group:{_id:"$author.name",total:{$sum:1}}
+    }
+])
+
+db.books.distinct("title")
+
+
+obj = { name: "john" }
+
+
+let key = "name"
+
+obj.key
+
+
+
+
+
+
+
