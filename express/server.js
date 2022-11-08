@@ -7,6 +7,9 @@ const app = express()
 
 const User = require("./model/User")
 
+const { body, validationResult } = require('express-validator');
+
+
 /* 
 [
   {
@@ -59,88 +62,120 @@ mongoose
     })
 
 let auth_middleware = (req, res, next) => {
-    console.log("inside auth middleware.");
+    // console.log("inside auth middleware.");
     next();
 }
 
 app.use(auth_middleware)
+
+app.use(express.json())
 
 
 app.get("/test", (req, res) => {
     res.send("TEST")
 })
 
-app.post("/users", async (req, res) => {
-
-    // db.users.insertOne()
-
-
-    // let user = new User({
-    //     name:"smth"
-    // })
-
-    // user.save();
-
-
-    // req
-
-    User.create({
-        name: "Ram with no age",
-        age: "adsfasdf"
-    }, (err, db_res) => {
-        if (err) {
-            res.status(500).send("error ")
+app.post("/users",
+    body('password').exists().isLength({ min: 8 }),
+    body('name').exists(),
+    (req, res, next) => {
+        // Finds the validation errors in this request and wraps them in an object with handy functions
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
         }
-    })
+        next()
+    },
+    async (req, res) => {
 
-    /* 
-        http status codes
-        200
-        400
-            400 - bad request
-            401
-            403
-            404
-        500 - server
-    */
+        // User.findOne({ email: "b@b.com" }, (err, data) => {
+        //     console.log(data)
+        // })
 
-    
+        // // let e_user = await  Product.findById("adfsadsf")
+        // let e_user = await  User.findOne({ email: "b@b.com" })
+        // console.log(e_user)
+        // console.log("second..");
 
-    return
-
-    // try {
-
-    let user = await User.create({
-        name: "Ram with no age",
-        age: "adsfasdf"
-    })
-
-    if (user) {
-        res.send(user)
-    }
-    // }
-    // catch (err) {
-    //     res.status(500).send("from try catch")
-    //     console.log(err.message);
-    // }
+        // return;
+        // db.users.insertOne()
 
 
+        // let user = new User({
+        //     name:"smth"
+        // })
 
-    return;
-    User.create({
-        name: "Ram with no age",
-        // age: "adsfasdf"
-    })
-        .then(db_res => {
-            console.log("db response")
-            console.log("set in users...");
+        // user.save();
+
+        // if (!req.body.name) {
+
+        // }
+
+
+        // console.log(req.body);
+
+        console.log("payment_received");
+
+        /*  */
+
+        const { name, age } = req.body
+
+        User.create(req.body, (err, db_res) => {
+            if (err) {
+                return res.status(500).send("error " + err.message)
+            }
             res.send(db_res)
-        }).catch(err => {
-            res.status(500).send("server errro")
-            console.log(err.message);
+
         })
 
-})
+        /* 
+            http status codes
+            200
+            400
+                400 - bad request
+                401
+                403
+                404
+            500 - server
+        */
+
+
+
+        return
+
+        // try {
+
+        let user = await User.create({
+            name: "Ram with no age",
+            age: "adsfasdf"
+        })
+
+        if (user) {
+            res.send(user)
+        }
+        // }
+        // catch (err) {
+        //     res.status(500).send("from try catch")
+        //     console.log(err.message);
+        // }
+
+
+
+        return;
+        User.create({
+            name: "Ram with no age",
+            // age: "adsfasdf"
+        })
+            .then(db_res => {
+                console.log("db response")
+                console.log("set in users...");
+                res.send(db_res)
+            }).catch(err => {
+                res.status(500).send("server errro")
+                console.log(err.message);
+            })
+
+    })
 
 
 app.listen(8000, (err, data) => {
