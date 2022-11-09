@@ -2,6 +2,8 @@
 
 const express = require("express")
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 const app = express()
 
@@ -71,8 +73,56 @@ app.use(auth_middleware)
 app.use(express.json())
 
 
+
+
+/* 
+    make auth middleware.
+        // verify token 
+
+*/
+// TODO: make orders route protected 
+
+app.get("/orders", (req, res) => {
+    res.send("orders")
+})
+
 app.get("/test", (req, res) => {
     res.send("TEST")
+})
+
+
+app.post("/login", async (req, res) => {
+
+
+    // let req_token = "ezJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE2Njc5ODc2MzN9.yZ817SxZqtkhLTrF8ScmzNTTyzbpvjkpYVCo4qcSfNY"
+    // var decoded = jwt.verify(req_token, 'shhhhh');
+    // console.log(decoded)
+    // return;
+
+    let user = await User.findOne({ email: req.body.email })
+
+    if (user) {
+        // check password
+        let db_user = await User.findOne({ email: req.body.email }).select("password")
+
+        let status = await bcrypt.compare(req.body.password, db_user.password);
+
+        if (status) {
+            // var token = jwt.sign({ ...user.toObject(), password: "" }, 'shhhhh');
+            var token = jwt.sign(user.toObject(), 'shhhhh');
+
+            return res.send({
+                token,
+                user,
+            })
+        }
+    }
+
+    return res.status(400).send("invalid credentials")
+
+
+
+
 })
 
 app.post("/users",
@@ -120,7 +170,12 @@ app.post("/users",
 
         const { name, age } = req.body
 
-        User.create(req.body, (err, db_res) => {
+        // db.users.inserOne({})
+
+        // bcrypt.hash(req.body.password, 10, function(err, hash) {
+        let hased_pw = await bcrypt.hash(req.body.password, 10);
+
+        User.create({ ...req.body, password: hased_pw }, (err, db_res) => {
             if (err) {
                 return res.status(500).send("error " + err.message)
             }

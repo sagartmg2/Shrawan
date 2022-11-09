@@ -27,14 +27,17 @@ const UserSchema = new Schema({
         type: String,
         minLength: 8,
         required: true,
+        select: false,
     },
     email: {
         type: String,
         // unique: true,
-        required: true,
+        // required: true,
         validate: {
             validator: async function (value) {
-                let e_user = await this.constructor.findOne({ email: value })
+                // mongoose.models.User
+                let e_user = await mongoose.models.User.findOne({ email: value })
+                // let e_user = await this.constructor.findOne({ email: value })
                 console.log({ e_user })
                 if (e_user) {
                     return false
@@ -77,7 +80,8 @@ const UserSchema = new Schema({
 
             }
         }
-    ]
+    ],
+    numbers: [Number]
 });
 
 
