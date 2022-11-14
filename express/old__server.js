@@ -5,12 +5,15 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
+const multer = require('multer')
 const app = express()
-
-const User = require("./model/User")
 
 const { body, validationResult } = require('express-validator');
 
+const User = require("./model/User")
+const Product = require("./model/Product")
+
+app.use(express.static('uploads'))
 
 /* 
 [
@@ -54,6 +57,21 @@ users.map(user => {
 })
 
 */
+
+const path = require("path")
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/images')
+    },
+    filename: function (req, file, cb) {
+            console.log({file})
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)+ path.extname(file.originalname)
+      cb(null, file.fieldname + '-' + uniqueSuffix)
+    }
+  })
+const upload = multer({ storage: storage})
+
 mongoose
     .connect('mongodb://localhost:27017/shrawan')
     .then(res => {
@@ -82,7 +100,59 @@ app.use(express.json())
 */
 // TODO: make orders route protected 
 
-app.get("/orders", (req, res) => {
+
+const authenticate = (req, res, next) => {
+
+    try {
+        if (req.headers.authorization) {
+            let token = req.headers.authorization.split(" ")[1]
+            var decoded = jwt.verify(token, 'shhhhh');
+            // console.log({ decoded })
+            req.user = decoded
+            if (decoded) {
+                return next()
+            }
+        }
+    }
+    catch (err) {
+        return next(err)
+    }
+
+    return res.status(401).send("unautnticated...")
+
+    // axios.get(,{
+    //     headers
+    //     :token
+    // })
+}
+
+// app.use(authenticate)
+
+const isSeller = (req, res, next) => {
+
+    if (req.user.role == "seller") {
+        return next()
+    }
+    return res.status(403).send("access denied")
+}
+
+// app.use(upload.array('images', 12))
+
+app.post("/products", authenticate, isSeller, upload.array('images', 12), async (req, res, next) => {
+
+    console.log(req.body)
+    console.log(req.files);
+    // return;
+    try {
+        let product = await Product.create({ ...req.body, user_id: req.user._id,images:[...req.files.map(el => el.filename)] });
+        return res.send(product)
+    } catch (err) {
+        return next(err)
+    }
+
+})
+
+app.get("/orders", authenticate, isSeller, (req, res) => {
     res.send("orders")
 })
 
@@ -231,6 +301,16 @@ app.post("/users",
             })
 
     })
+app.use((err, req, res, next) => {
+    console.log(err.name)
+    status = 500;
+
+    if (err.name == "JsonWebTokenError") {
+        status = 401;
+    }
+
+    res.status(status).send(err.message)
+})
 
 
 app.listen(8000, (err, data) => {
