@@ -9,6 +9,10 @@ const index = async (req, res, next) => {
     let price_to = parseFloat(req.query.price_to || 99999999)
     let search_term = req.query.search_term || "";
 
+    let page = parseInt(req.query.page || 1);
+    let per_page = parseInt(req.query.per_page || 1)
+    // let per_page = req.query.per_page || 25
+
 
     let sort = { name: 1 };
 
@@ -21,6 +25,12 @@ const index = async (req, res, next) => {
             case "namedesc":
                 sort = { name: -1 }
                 break;
+            case "priceasc":
+                sort = { price: 1 }
+                break;
+            case "pricedesc":
+                sort = { price: -1 }
+                break;
             default:
                 sort = { name: 1 }
                 break;
@@ -28,12 +38,8 @@ const index = async (req, res, next) => {
 
     }
 
-    console.log({ sort })
+    let count = await Product.find({
 
-
-
-
-    let products = await Product.find({
         $or: [
             {
                 name: { $regex: RegExp(search_term, "i") },
@@ -46,10 +52,58 @@ const index = async (req, res, next) => {
             { price: { $gte: price_from } },
             { price: { $lte: price_to } },
         ]
-    }).sort(sort);
+    }).sort(sort)
+        .limit(per_page)
+        .skip(((page - 1) * per_page)).count()
+        ;
+
+
+
+    let products = await Product.aggregate([
+        {
+            $match: {
+                $or: [
+                    {
+                        name: { $regex: RegExp(search_term, "i") },
+                    },
+                    {
+                        brands: { $in: [RegExp(search_term, "i")] },
+                    }
+                ],
+                $and: [
+                    { price: { $gte: price_from } },
+                    { price: { $lte: price_to } },
+                ]
+            }
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "created_by",
+                foreignField: "_id",
+                as: "user"
+            }
+        },
+        {
+            $unwind: "$user"
+        },
+        // {
+        //     $limit: 1
+        // }
+        {
+            $facet: {
+                metadata: [{ $count: "total" }, { $addFields: { page: page, per_page: per_page } }],
+                data: [{ $skip: ((page - 1) * per_page) }, { $limit: per_page },]
+            }
+        }
+    ])
+
+    // let total_products = await Product.find({}).count();
 
     res.send({
-        data: products
+        data: products,
+        // total: total_products
+        count: count,
     })
 
 }
@@ -69,12 +123,32 @@ const store = async (req, res, next) => {
     }
 
 }
-const update = (req, res, next) => {
-    res.send("list of produc ts...")
+const update = async (req, res, next) => {
+
+    try {
+
+        let product = await Product.findByIdAndUpdate(req.params.id, { ...req.body }, {
+            new: true,
+            runValidators: true,
+        })
+
+        res.send({
+            data: product
+        })
+    }
+    catch (err) {
+        next(err)
+    }
+
 
 }
-const remove = (req, res, next) => {
-    res.send("list of produc ts...")
+const remove = async (req, res, next) => {
+    let status = await Product.findByIdAndDelete(req.params.id)
+
+    res.send({
+        data: status
+    })
+
 
 }
 

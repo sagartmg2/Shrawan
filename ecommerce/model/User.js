@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const { BUYER, SELLER } = require("../constant/role");
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
@@ -32,9 +33,9 @@ const UserSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ["buyer", "seller"],
+        enum: [BUYER, SELLER],
         lowercase: true,
-        required:true,
+        required: true,
     },
 });
 
