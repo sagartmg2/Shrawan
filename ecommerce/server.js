@@ -13,7 +13,9 @@ app.use("/api/users", user_route);
 app.use("/api/products", product_route);
 app.use("/api/orders", order_route); // 401
 
+app.get("/test",() => {
 
+})
 
 
 /* 
