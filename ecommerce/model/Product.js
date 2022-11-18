@@ -29,6 +29,22 @@ const ProductSchema = new Schema({
         required: true,
         ref: "User"
     },
+    reviews: [{
+        created_by: {
+            type: ObjectId,
+            required: true,
+        },
+        rating: {
+            type: Number,
+            min: 1,
+            max: 5,
+            required: true,
+        },
+        comment: {
+            type: String,
+            maxlength: 255,
+        }
+    }]
 })
 
 

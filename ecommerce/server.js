@@ -6,11 +6,12 @@ require('dotenv').config()
 require("./config/db_connection")
 const user_route = require("./route/user")
 const product_route = require("./route/product")
+const order_route = require("./route/order")
 
 app.use(express.json()) // to read request body
 app.use("/api/users", user_route);
 app.use("/api/products", product_route);
-// app.use("/api/orders", user_route); // 401
+app.use("/api/orders", order_route); // 401
 
 
 

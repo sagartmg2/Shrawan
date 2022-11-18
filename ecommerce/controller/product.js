@@ -140,6 +140,49 @@ const update = async (req, res, next) => {
         next(err)
     }
 
+}
+const updateReview = async (req, res, next) => {
+
+    try {
+
+        let count = await Product.findOne({ "reviews.created_by": req.user._id }).count();
+        let product;
+        if (count == 0) {
+            // create new review
+            product = await Product.findByIdAndUpdate(req.params.id, {
+                $push: { reviews: { ...req.body, created_by: req.user._id } }
+            }, {
+                new: true,
+                runValidators: true,
+            })
+        } else {
+            // update existing review.
+
+
+            /* 
+                let reviews =  []
+                updated_reviews = [].filter(el => el.created_by != req.user._id)
+
+                Product.update , reviews: updated_reviews..
+            
+            */
+
+            product = await Product.findOneAndUpdate({ _id: req.params.id, "reviews.created_by": req.user._id }, {
+                $set: { "reviews.$": { ...req.body, created_by: req.user._id } }
+            }, {
+                new: true,
+                runValidators: true,
+            })
+        }
+
+
+        res.send({
+            data: product
+        })
+    }
+    catch (err) {
+        next(err)
+    }
 
 }
 const remove = async (req, res, next) => {
@@ -157,5 +200,5 @@ const remove = async (req, res, next) => {
 
 
 module.exports = {
-    index, store, update, remove
+    index, store, update, remove, updateReview
 }
